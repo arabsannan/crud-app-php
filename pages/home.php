@@ -38,7 +38,7 @@ if ($stmt->num_rows > 0) {
 <body>	
 	<div class="container flex items-center justify-center mx-auto">
 		<div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-20 mx-6">
-			<h2 class="text-gray-800 text-3xl font-semibold">Welcome back, <p class="capitalize inline"><?=$_SESSION['name']?></p>!</h2>
+			<h2 class="text-gray-800 text-center text-3xl font-semibold">Welcome back, <p class="capitalize inline"><?=$_SESSION['name']?></p>!</h2>
 			<div>				
 				<h1 class="text-xl text-center text-blue-800 font-bold py-2">UPDATE YOUR CREDENTIALS</h1>
 				<!-- Success Message -->
@@ -122,7 +122,10 @@ if ($stmt->num_rows > 0) {
 				</form>		
 			</div>
 			<!-- Update Form Ends -->
-			<div class="flex justify-end mt-4">
+			<div class="flex justify-between mt-4">
+				<a href="gallery.php" class="text-blue-500 hover:underline font-bold">
+					View gallery
+				</a>
 				<a href="logout.php">
 					<button class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-full">
 					Log out
