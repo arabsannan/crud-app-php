@@ -56,7 +56,7 @@ if ($stmt->num_rows > 0) {
 					<!-- Profile Image -->	
 					<?php if($image_path===NULL){
 						echo '<div class="flex justify-center mb-6 mt-4">
-							<input accept="image/*" type=file name="fileToUpload" id="fileToUpload">
+							<input accept="image/*" class="" type=file name="fileToUpload" id="fileToUpload">
 							<img class="w-20 h-20 object-cover rounded-full border-2  border-blue-800" src="../assets/img/unknown_profile_img.png">
 							</div>';
 						}else{

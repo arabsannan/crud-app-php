@@ -1,14 +1,13 @@
 <?php
-    $target_dir = "../uploads/images/";
+    $target_dir = "../uploads/images/profiles/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-   
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     // $imageErr = "";
 
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    
+    if(issse)
     if($check) {
         // Check if file already exists
         if (file_exists($target_file)) {
@@ -20,22 +19,23 @@
         }
 
         // Allow certain file formats
-        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "jfif") {
              $_SESSION['imageErr'] = "Sorry, only JPG, JPEG and PNG files are allowed.";
-           
         }
 
         if(empty($imageErr)){
-            move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-            
-            // Insert image into database
-            $stmt = $con->prepare('UPDATE accounts SET image_path=? WHERE id =?');
-            $stmt->bind_param('ss', $target_file, $_SESSION['id']);
-            $stmt->execute();
-            $stmt->close();
-
-            $_SESSION['success_message'] = "Image updated successfully";
-            // $imageSuccess = "Image uploaded successfully";
+            if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)){
+               // Insert image into database
+                $stmt = $con->prepare('UPDATE accounts SET image_path=? WHERE id =?');
+                $stmt->bind_param('ss', $target_file, $_SESSION['id']);
+                $stmt->execute();
+                $stmt->close();
+                unset($_FILES["fileToUpload"]);
+                $_SESSION['success_message'] = "Image updated successfully";
+                // $imageSuccess = "Image uploaded successfully"; 
+            } else {
+                $_SESSION['imageErr'] = "Sorry, there was an error uploading your file.";
+            }           
         } else {
             $_SESSION['imageErr'] = "Sorry, there was an error uploading your file.";
         }

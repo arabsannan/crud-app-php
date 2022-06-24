@@ -1,5 +1,5 @@
 <?php
-// session_start();
+
 require "../db.php";
 
     $stmt = $con->prepare('SELECT email, password FROM accounts WHERE id = ? ');
@@ -14,7 +14,8 @@ require "../db.php";
 
     if(isset($_POST['updateBtn'])){
         //Check if profile image has been updated
-        if(isset($_FILES['fileToUpload'])){
+        // var_dump($_FILES);
+        if(isset($_FILES['fileToUpload']) && isset($_FILES['fileToUpload']['tmp_name']) && !empty($_FILES['fileToUpload']['tmp_name'])){
             require 'upload.php';
         }
 
